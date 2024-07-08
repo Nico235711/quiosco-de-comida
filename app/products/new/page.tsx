@@ -6,10 +6,3 @@ export default function NewProductPage() {
     <div>NewProductPage</div>
   )
 }
-
-
-export const page = () => {
-  return (
-    <div>page</div>
-  )
-}
