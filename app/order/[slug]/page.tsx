@@ -1,4 +1,6 @@
+import ProductCard from "@/components/products/ProductCard";
 import { prisma } from "@/src/lib/prisma";
+import Image from "next/image";
 
 async function getProducts(category: string) {
   const products = await prisma.product.findMany({
@@ -7,16 +9,20 @@ async function getProducts(category: string) {
     }
   })
 
-  return products 
+  return products
 }
 
 export default async function OrderPage({ params }: { params: { slug: string } }) {
 
   const products = await getProducts(params.slug)
-  console.log(products);
-  
 
   return (
-    <h1>OrderPage</h1>
+    <>
+      <div className="grid gap-4 grid-cols-1 lg:grid-cols-3">
+        {products.map(product => (
+          <ProductCard key={product.id} product={product} />
+        ))}
+      </div>
+    </>
   );
 }
