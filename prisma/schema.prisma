@@ -7,3 +7,24 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+// creando el modelo de la BD
+model Category { // columna
+  // campos
+  id  Int @id @default(autoincrement())
+  name  String
+  slug  String
+  // relación inversa
+  products  Product[]
+}
+
+model Product { // columna
+  // campos
+  id  Int @id @default(autoincrement())
+  name  String
+  price Float
+  image String
+  categoryId  Int
+  // @relation: fields:  campo que quiero relacionar, references: a que hace referencia 
+  category Category @relation(fields: [categoryId], references: [id])
+}
