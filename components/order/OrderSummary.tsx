@@ -3,7 +3,7 @@
 import { useStore } from "@/src/store"
 import ProductDetails from "./ProductDetails"
 import { formatCurrency } from "@/src/utils"
-import { useMemo } from "react"
+import { useMemo, useState } from "react"
 import { createOrder } from "@/actions/create-order-action"
 
 
@@ -12,8 +12,13 @@ export default function OrderSummary() {
   const order = useStore((state) => state.order)
   const total = useMemo(() => order.reduce((total, item) => total + item.subTotal, 0), [order])
 
-  const handleCreateOrder = () => {
-    createOrder()
+  const [clientName, setClientName] = useState("")
+  const nameExists = !!clientName // convierte a booleano
+
+  const handleCreateOrder = (formData: FormData) => {
+    console.log(formData.get("name"));
+    
+    // createOrder()
   }
 
   return (
@@ -31,10 +36,21 @@ export default function OrderSummary() {
           </p>
 
           <form className="w-full mt-10 space-y-5" action={handleCreateOrder}>
+
+            <input
+              type="text" 
+              placeholder="Ingrese su nombre para confimar el pedido"
+              onChange={e => setClientName(e.target.value)}
+              value={clientName}
+              className="border border-gray-200 w-full p-1 text-sm"
+              name="name"
+            />
+
             <input
               type="submit"
               value="Confirmar Pedido" 
-              className="py-3 rounded uppercase text-white bg-black w-full cursor-pointer"
+              className="py-3 rounded uppercase text-white bg-black w-full cursor-pointer disabled:opacity-10"
+              disabled={!nameExists}
             />
           </form>
         </div>
