@@ -10,7 +10,7 @@ export default async function OrderSideBar() {
   const categories = await getCatories()  
 
   return (  
-    <aside className="bg-white md:h-screen md:w-72">
+    <aside className="bg-white lg:h-screen lg:w-72">
       <nav className="mt-10">
         {categories.map(category => (
           <CategoryIcon key={category.id} category={category} />

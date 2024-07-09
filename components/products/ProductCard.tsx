@@ -15,6 +15,7 @@ export default function ProductCard({ product }: ProductCardProps) {
         alt={`image de ${product.name}`}
         width={400}
         height={400}
+        className="block mx-auto"
       />
 
       <div>
@@ -23,7 +24,7 @@ export default function ProductCard({ product }: ProductCardProps) {
         <input
           type="button"
           value="Agregar al Pedido" 
-          className="bg-black text-white py-1 px-4 mt-5 w-full text-xl flex justify-end"
+          className="bg-indigo-600 hover:bg-indigo-700 transition-all text-white py-1 px-4 mt-5 w-full text-xl cursor-pointer lg:text-lg"
         />
       </div>
     </div>
