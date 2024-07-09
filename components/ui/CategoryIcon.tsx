@@ -1,4 +1,4 @@
-"use client"
+"use client" // aca uso "use client" para usar useParams que solo funciona en componentes de cliente
 
 import { Category } from "@prisma/client"
 import Image from "next/image"
