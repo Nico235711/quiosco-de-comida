@@ -20,11 +20,32 @@ model Category { // columna
 
 model Product { // columna
   // campos
-  id  Int @id @default(autoincrement())
-  name  String
-  price Float
-  image String
-  categoryId  Int
+  id             Int      @id @default(autoincrement())
+  name           String
+  price          Float
+  image          String
+  categoryId     Int
   // @relation: fields:  campo que quiero relacionar, references: a que hace referencia 
-  category Category @relation(fields: [categoryId], references: [id])
+  category       Category @relation(fields: [categoryId], references: [id])
+  orderProducts  OrderProduct[]
+}
+
+model Order { // columna
+  // campos
+  id             Int     @id @default(autoincrement())
+  name           String
+  total          Float
+  date           DateTime    @default(now())
+  status         Boolean     @default(false)
+  orderRadyAt    DateTime? // opcional
+  orderProducts  OrderProduct[]
+}
+
+model OrderProduct { // columna
+  // campos
+  id          Int     @id @default(autoincrement())
+  orderId     Int
+  order       Order   @relation(fields: [orderId], references: [id])
+  productId   Int
+  product     Product @relation(fields: [productId], references: [id])
 }
