@@ -6,26 +6,39 @@ import { formatCurrency } from "@/src/utils"
 import { useMemo, useState } from "react"
 import { createOrder } from "@/actions/create-order-action"
 import { OrderSchema } from "@/src/schema"
+import { toast } from "react-toastify"
 
 
 export default function OrderSummary() {
-  
+
   const order = useStore((state) => state.order)
+  const cleanOrder = useStore((state) => state.cleanOrder)
   const total = useMemo(() => order.reduce((total, item) => total + item.subTotal, 0), [order])
 
-  const [clientName, setClientName] = useState("")
-  const nameExists = !!clientName // convierte a booleano
-
-  const handleCreateOrder = (formData: FormData) => {
+  const handleCreateOrder = async (formData: FormData) => {
     const data = {
       name: formData.get("name"),
       total,
       order
     }
     const result = OrderSchema.safeParse(data)
-    
-    
-    createOrder(result.data)
+    if (!result.success) {
+      result.error?.issues.forEach(issue => (
+        toast.error(issue.message)
+      ))
+      return
+    }
+    const response = await createOrder(data)
+
+    if (response?.errors) {
+      response.errors.forEach(issue => (
+        toast.error(issue.message)
+      ))
+      return
+    }
+
+    toast.success("Pedido realizado")
+    cleanOrder()
   }
 
   return (
@@ -38,26 +51,23 @@ export default function OrderSummary() {
           {order.map(item => (
             <ProductDetails key={item.id} item={item} />
           ))}
-          <p className="mt-5 text-2xl">Total a Pagar: {""} 
+          <p className="mt-5 text-2xl">Total a Pagar: {""}
             <span className="font-bold">{formatCurrency(total)}</span>
           </p>
 
           <form className="w-full mt-10 space-y-5" action={handleCreateOrder}>
 
             <input
-              type="text" 
+              type="text"
               placeholder="Ingrese su nombre para confimar el pedido"
-              onChange={e => setClientName(e.target.value)}
-              value={clientName}
               className="border border-gray-200 w-full p-1 text-sm"
               name="name"
             />
 
             <input
               type="submit"
-              value="Confirmar Pedido" 
+              value="Confirmar Pedido"
               className="py-3 rounded uppercase text-white bg-black w-full cursor-pointer disabled:opacity-10"
-              disabled={!nameExists}
             />
           </form>
         </div>
