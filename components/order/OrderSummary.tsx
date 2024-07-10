@@ -5,6 +5,7 @@ import ProductDetails from "./ProductDetails"
 import { formatCurrency } from "@/src/utils"
 import { useMemo, useState } from "react"
 import { createOrder } from "@/actions/create-order-action"
+import { OrderSchema } from "@/src/schema"
 
 
 export default function OrderSummary() {
@@ -16,13 +17,15 @@ export default function OrderSummary() {
   const nameExists = !!clientName // convierte a booleano
 
   const handleCreateOrder = (formData: FormData) => {
-    console.log(formData.get("name"));
-    
-    // createOrder()
+    const data = {
+      name: formData.get("name")
+    }
+    const result = OrderSchema.safeParse(data)
+    if (result.success)p  createOrder()
   }
 
   return (
-    <aside className="lg:h-screen lg:overflow-y-scroll md:w-64 lg:w-96 p-5">
+    <aside className="lg:h-screen lg:overflow-y-scroll md:w-full lg:w-96 p-5">
       <h1 className="text-center text-4xl font-black">Mi Pedido</h1>
       {order.length === 0 ? (
         <p className="text-2xl text-center mt-5">El pedido esta vacío</p>
