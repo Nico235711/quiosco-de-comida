@@ -18,10 +18,14 @@ export default function OrderSummary() {
 
   const handleCreateOrder = (formData: FormData) => {
     const data = {
-      name: formData.get("name")
+      name: formData.get("name"),
+      total,
+      order
     }
     const result = OrderSchema.safeParse(data)
-    if (result.success)p  createOrder()
+    
+    
+    createOrder(result.data)
   }
 
   return (
