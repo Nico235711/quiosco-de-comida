@@ -27,7 +27,7 @@ export default async function OrdersPage() {
       <Heading label="Administrar Ordenes" />
 
       {orders.length === 0 ? (
-        <p className="text-2xl text-center mt-5">No hay ordenes</p>
+        <p className="text-2xl mt-5">No hay ordenes</p>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-5">
           {orders.map(order => (
