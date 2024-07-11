@@ -21,7 +21,6 @@ async function getPendingOrders() {
 export default async function OrdersPage() {
 
   const orders = await getPendingOrders()  
-console.log(orders);
 
   return (
     <>
