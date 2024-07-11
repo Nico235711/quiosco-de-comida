@@ -1,8 +1,8 @@
 
 
-export default function page() {
+export default function OrdersPage() {
 
   return (
-    <div>page</div>
+    <div>OrdersPage</div>
   )
 }
