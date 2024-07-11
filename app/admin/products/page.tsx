@@ -3,12 +3,18 @@ import Heading from "@/components/ui/Heading";
 import { prisma } from "@/src/lib/prisma";
 
 async function getProducts() {
-  return prisma.product.findMany()
+  return prisma.product.findMany({
+    include: {
+      category: true
+    }
+  })
 }
+
+export type ProductsWithCategory = Awaited<ReturnType<typeof getProducts>>
 
 export default async function ProductsPage() {  
 
-  const products = await getProducts()
+  const products = await getProducts()  
 
   return (
     <>
