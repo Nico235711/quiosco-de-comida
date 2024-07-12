@@ -1,10 +1,16 @@
+"use client"
+
 import ProductForm from "./ProductForm";
 
 export default async function AddProductForm() {
 
+  const handleSubmit = async (formData: FormData) => {
+    console.log("🚀 ~ handleSubmit ~ handleSubmit")
+  }
+
   return (
     <div className="bg-white shadow rounded mt-10 px-5 py-10 max-w-3xl mx-auto">
-      <form className="space-y-5">
+      <form className="space-y-5" action={handleSubmit}>
         <ProductForm />
 
         <input
