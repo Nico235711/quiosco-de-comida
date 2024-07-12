@@ -1,6 +1,6 @@
 import ProductForm from "./ProductForm";
 
-export default function AddProductForm() {
+export default async function AddProductForm() {
 
   return (
     <div className="bg-white shadow rounded mt-10 px-5 py-10 max-w-3xl mx-auto">
