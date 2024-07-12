@@ -1,8 +1,13 @@
+import AddProductForm from "@/components/products/AddProductForm";
+import Heading from "@/components/ui/Heading";
 
 
 export default function NewProductPage() {
 
   return (
-    <div>NewProductPage</div>
+    <>
+      <Heading label="Nuevo Producto" />
+      <AddProductForm />
+    </>
   )
 }
