@@ -29,7 +29,7 @@ export default async function AddProductForm({children}: {children: ReactNode}) 
         <input
           type="submit"
           value="Agregar Producto" 
-          className="p-3 rounded uppercase text-white bg-black w-full cursor-pointer"
+          className="p-3 rounded uppercase text-white bg-indigo-600 hover:bg-indigo-700 transition-all w-full cursor-pointer"
         />
       </form>
     </div>
