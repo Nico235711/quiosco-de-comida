@@ -1,8 +1,9 @@
 "use client"
 
+import { ReactNode } from "react";
 import ProductForm from "./ProductForm";
 
-export default async function AddProductForm() {
+export default async function AddProductForm({children}: {children: ReactNode}) {
 
   const handleSubmit = async (formData: FormData) => {
     console.log("🚀 ~ handleSubmit ~ handleSubmit")
@@ -11,7 +12,7 @@ export default async function AddProductForm() {
   return (
     <div className="bg-white shadow rounded mt-10 px-5 py-10 max-w-3xl mx-auto">
       <form className="space-y-5" action={handleSubmit}>
-        <ProductForm />
+        {children}
 
         <input
           type="submit"
