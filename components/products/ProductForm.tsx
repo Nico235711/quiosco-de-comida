@@ -1,4 +1,5 @@
 import { prisma } from "@/src/lib/prisma";
+import ImageUpload from "./ImageUpload";
 
 
 async function getCategories() {
@@ -54,6 +55,8 @@ export default async function ProductForm() {
           ))}
 
         </select>
+
+        <ImageUpload />
       </div>
     </>
   )
