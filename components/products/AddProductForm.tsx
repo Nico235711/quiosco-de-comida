@@ -11,7 +11,8 @@ export default async function AddProductForm({children}: {children: ReactNode}) 
     const data = {
       name: formData.get("name"),
       price: formData.get("price"),
-      categoryId: formData.get("categoryId")
+      categoryId: formData.get("categoryId"),
+      image: formData.get("image")
     }
 
     const result = ProductSchema.safeParse(data)
